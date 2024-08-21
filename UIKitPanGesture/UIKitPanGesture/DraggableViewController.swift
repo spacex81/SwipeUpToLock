@@ -6,6 +6,7 @@ class DraggableViewController: UIViewController {
     private var longPressRecognized = false
     private var initialCenterY: CGFloat = 0.0
     private var maxUpwardDistance: CGFloat = 0.0
+    private var isLocked = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +58,10 @@ class DraggableViewController: UIViewController {
             longPressRecognized = true
         } else if gesture.state == .ended {
             longPressRecognized = false
-            // Animate back to the original position when the long press ends
-            animateViewBackToOriginalPosition()
+            // Animate back to the original position if not locked
+            if !isLocked {
+                animateViewBackToOriginalPosition()
+            }
         }
     }
 
@@ -70,19 +73,27 @@ class DraggableViewController: UIViewController {
         
         if gesture.state == .began || gesture.state == .changed {
             let newCenterY = draggedView.center.y + translation.y
-            
-            // Calculate the maximum allowed position
             let minAllowedY = initialCenterY - maxUpwardDistance
-            
+
             // Only update the center if moving upwards and within bounds
             if translation.y < 0 && newCenterY >= minAllowedY {
                 draggedView.center = CGPoint(x: draggedView.center.x, y: newCenterY)
+                
+                // Set isLocked if the view has reached the minAllowedY
+                if newCenterY <= minAllowedY + 1 {
+                    if !isLocked {
+                        NSLog("LOG: is locked")
+                        isLocked = true
+                    }
+                }
             }
             gesture.setTranslation(.zero, in: view)
         } else if gesture.state == .ended {
             longPressRecognized = false
-            // Animate back to the original position when the pan ends
-            animateViewBackToOriginalPosition()
+            // Animate back to the original position if not locked
+            if !isLocked {
+                animateViewBackToOriginalPosition()
+            }
         }
     }
 
