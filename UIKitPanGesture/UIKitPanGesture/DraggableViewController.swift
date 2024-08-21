@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 class DraggableViewController: UIViewController {
 
@@ -6,7 +7,9 @@ class DraggableViewController: UIViewController {
     private var longPressRecognized = false
     private var initialCenterY: CGFloat = 0.0
     private var maxUpwardDistance: CGFloat = 0.0
-    private var isLocked = false
+//    private var isLocked = false
+    private var viewModel = ContentViewModel.shared
+    private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,14 @@ class DraggableViewController: UIViewController {
         
         // Add gesture recognizers
         setupGestures()
+        
+        viewModel.$isLocked
+            .sink { [weak self] isLocked in
+                if !isLocked {
+                    self?.animateViewBackToOriginalPosition()
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func centerDraggableView() {
@@ -59,7 +70,10 @@ class DraggableViewController: UIViewController {
         } else if gesture.state == .ended {
             longPressRecognized = false
             // Animate back to the original position if not locked
-            if !isLocked {
+//            if !isLocked {
+//                animateViewBackToOriginalPosition()
+//            }
+            if !viewModel.isLocked {
                 animateViewBackToOriginalPosition()
             }
         }
@@ -80,10 +94,16 @@ class DraggableViewController: UIViewController {
                 draggedView.center = CGPoint(x: draggedView.center.x, y: newCenterY)
                 
                 // Set isLocked if the view has reached the minAllowedY
+//                if newCenterY <= minAllowedY + 1 {
+//                    if !isLocked {
+//                        NSLog("LOG: is locked")
+//                        isLocked = true
+//                    }
+//                }
                 if newCenterY <= minAllowedY + 1 {
-                    if !isLocked {
+                    if !viewModel.isLocked {
                         NSLog("LOG: is locked")
-                        isLocked = true
+                        viewModel.isLocked = true
                     }
                 }
             }
@@ -91,7 +111,10 @@ class DraggableViewController: UIViewController {
         } else if gesture.state == .ended {
             longPressRecognized = false
             // Animate back to the original position if not locked
-            if !isLocked {
+//            if !isLocked {
+//                animateViewBackToOriginalPosition()
+//            }
+            if !viewModel.isLocked {
                 animateViewBackToOriginalPosition()
             }
         }

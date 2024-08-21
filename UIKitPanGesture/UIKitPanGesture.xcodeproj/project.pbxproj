@@ -13,6 +13,7 @@
 		C81DA9232C74D8FA00AD2AA4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C81DA9222C74D8FA00AD2AA4 /* Preview Assets.xcassets */; };
 		C81DA9422C74E2B300AD2AA4 /* DraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DA9412C74E2B300AD2AA4 /* DraggableViewController.swift */; };
 		C81DA9442C74E33300AD2AA4 /* DraggableViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DA9432C74E33300AD2AA4 /* DraggableViewControllerWrapper.swift */; };
+		C8458EA32C75A7B400DA6D45 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8458EA22C75A7B400DA6D45 /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C81DA9222C74D8FA00AD2AA4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C81DA9412C74E2B300AD2AA4 /* DraggableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableViewController.swift; sourceTree = "<group>"; };
 		C81DA9432C74E33300AD2AA4 /* DraggableViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableViewControllerWrapper.swift; sourceTree = "<group>"; };
+		C8458EA22C75A7B400DA6D45 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				C81DA91B2C74D8F900AD2AA4 /* UIKitPanGestureApp.swift */,
 				C81DA91D2C74D8F900AD2AA4 /* ContentView.swift */,
+				C8458EA22C75A7B400DA6D45 /* ContentViewModel.swift */,
 				C81DA9412C74E2B300AD2AA4 /* DraggableViewController.swift */,
 				C81DA9432C74E33300AD2AA4 /* DraggableViewControllerWrapper.swift */,
 				C81DA91F2C74D8FA00AD2AA4 /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 				C81DA9422C74E2B300AD2AA4 /* DraggableViewController.swift in Sources */,
 				C81DA91E2C74D8F900AD2AA4 /* ContentView.swift in Sources */,
 				C81DA91C2C74D8F900AD2AA4 /* UIKitPanGestureApp.swift in Sources */,
+				C8458EA32C75A7B400DA6D45 /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
